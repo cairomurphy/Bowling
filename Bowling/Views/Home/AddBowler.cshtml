@@ -19,6 +19,9 @@
             }
             </select><br />
 
+        <input type="hidden" name="state" asp-for="@Model.BowlerState" /> 
+        @* want to send up only one state per selection *@
+
         <input type="hidden" asp-for="BowlerID" readonly />
 
         <label asp-for="BowlerFirstName">First Name:</label>
@@ -42,7 +45,7 @@
         <label asp-for="BowlerState">State:</label>
         <select asp-for="BowlerState">
             @foreach (Bowler b in ViewBag.States) { 
-                <option value="@b.BowlerID">@b.BowlerState</option>
+                <option value="@b.BowlerState">@b.BowlerState</option>
             }
         </select><br />
 

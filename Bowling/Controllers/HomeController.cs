@@ -28,11 +28,28 @@ namespace Bowling.Controllers
             return View(blah);
         }
 
-        public IActionResult AddBowler()
+        [HttpGet]
+        public IActionResult AddBowler(string state)
         {
             ViewBag.Teams = _repo.Teams.ToList();
-            ViewBag.States = _repo.Bowlers.ToList();
+            ViewBag.States = _repo.Bowlers.Where(x => x.BowlerState == state).ToList();
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddBowler(Bowler b)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.CreateBowler(b);
+                _repo.SaveBowler(b);
+                return View("Confirmation", b);
+            }
+            else
+            {
+                ViewBag.Teams = _repo.Teams.ToList();
+                return View();
+            }
         }
 
     }
