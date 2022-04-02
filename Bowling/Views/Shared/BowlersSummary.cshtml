@@ -1,0 +1,17 @@
+﻿
+@{
+}
+@model Bowler
+
+<tr>
+    <td>@Model.BowlerFirstName</td>
+    <td>@Model.BowlerMiddleInit</td>
+    <td>@Model.BowlerLastName</td>
+    <td>@Model.BowlerAddress</td>
+    <td>@Model.BowlerCity</td>
+    <td>@Model.BowlerState</td>
+    <td>@Model.BowlerZip</td>
+    <td>@Model.BowlerPhoneNumber</td>
+    <td><a asp-controller="Home" asp-action="Edit" asp-route-bowlerid="@Model.BowlerID">Edit</a></td>
+    <td><a asp-controller="Home" asp-action="Delete" asp-route-bowlerid="@Model.BowlerID">Delete</a></td>
+</tr>

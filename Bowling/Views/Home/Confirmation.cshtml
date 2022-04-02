@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Bowler Submitted";
+}
+
+@model Bowler
+
+<p>New Bowler @Model.BowlerID has been received: @Model.BowlerFirstName @Model.BowlerLastName.</p>
+<p>Team: @Model.Team.TeamName</p>
+
+<a asp-controller="Home" asp-action="Index">Back to main page</a>

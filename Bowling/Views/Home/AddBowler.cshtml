@@ -6,7 +6,7 @@
 <h3>Add a Bowler</h3>
 
 <div>
-    <form method="post">
+    <form method="post" asp-action="AddBowler">
 
         <div asp-validation-summary="All"></div>
 
@@ -17,12 +17,13 @@
             {
                 <option value="@t.TeamID">@t.TeamName</option>
             }
-            </select><br />
+        </select><br />
 
-        <input type="hidden" name="state" asp-for="@Model.BowlerState" /> 
+        @*<label asp-for="TeamID">Team ID: </label>
+        <input asp-for="TeamID" readonly/><br />*@
+
+        @*<input type="hidden" name="state" asp-for="@Model.BowlerState" />*@
         @* want to send up only one state per selection *@
-
-        <input type="hidden" asp-for="BowlerID" readonly />
 
         <label asp-for="BowlerFirstName">First Name:</label>
         <input asp-for="BowlerFirstName" /><br />
@@ -33,9 +34,6 @@
         <label asp-for="BowlerLastName">Last Name:</label>
         <input asp-for="BowlerLastName" /><br />
 
-        <label asp-for="BowlerFirstName">First Name:</label>
-        <input asp-for="BowlerFirstName" /><br />
-
         <label asp-for="BowlerAddress">Address:</label>
         <input asp-for="BowlerAddress" /><br />
 
@@ -43,11 +41,8 @@
         <input asp-for="BowlerCity" /><br />
 
         <label asp-for="BowlerState">State:</label>
-        <select asp-for="BowlerState">
-            @foreach (Bowler b in ViewBag.States) { 
-                <option value="@b.BowlerState">@b.BowlerState</option>
-            }
-        </select><br />
+
+        <input asp-for="BowlerState" /><br />
 
         <label asp-for="BowlerZip">Zip:</label>
         <input asp-for="BowlerZip" /><br />

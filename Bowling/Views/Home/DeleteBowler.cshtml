@@ -1,0 +1,14 @@
+﻿@{
+}
+
+@model Bowler
+
+<h5>Are you sure you want to delete @Model.BowlerFirstName @Model.BowlerLastName? This action cannot be undone.</h5>
+
+<br />
+
+<form asp-action="DeleteBowler">
+    <button type="submit" class="btn btn-danger">Delete</button>
+
+    <input type="hidden" asp-for="BowlerID" />
+</form>
