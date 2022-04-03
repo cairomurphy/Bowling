@@ -21,8 +21,8 @@ namespace Bowling.Controllers
 
         public IActionResult Index(string teamname)
         {
-            var x = _repo.Bowlers
-            .Where(x => x.Team.TeamName == teamname || teamname == null);
+            //var x = _repo.Bowlers
+            //.Where(x => x.Team.TeamName == teamname || teamname == null);
 
 
             return View(_repo.Bowlers.ToList());
@@ -53,10 +53,19 @@ namespace Bowling.Controllers
         }
         
         [HttpGet]
-        public IActionResult TeamDisplay(Bowler b)
+        public IActionResult TeamDisplay()
         {
             ViewBag.Teams = _repo.Teams.ToList();
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult TeamDisplay( int teamid, string teamname)
+        {
+            ViewBag.Teams = _repo.Teams.ToList();
+            ViewBag.Name = _repo.Teams.Single(x => x.TeamName == teamname);
+            var blah = _repo.Bowlers.Where(x => x.TeamID == teamid).ToList();
+            return View(blah);
         }
 
 
