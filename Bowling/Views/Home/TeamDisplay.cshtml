@@ -1,0 +1,11 @@
+﻿@{
+}
+
+@model Bowler
+
+<h3>Available Teams</h3>
+
+@foreach (Team t in ViewBag.Teams)
+{
+    <p>@t.TeamName</p>
+}

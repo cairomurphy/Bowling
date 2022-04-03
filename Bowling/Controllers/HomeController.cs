@@ -51,6 +51,14 @@ namespace Bowling.Controllers
             }
            
         }
+        
+        [HttpGet]
+        public IActionResult TeamDisplay(Bowler b)
+        {
+            ViewBag.Teams = _repo.Teams.ToList();
+            return View();
+        }
+
 
         [HttpGet]
         public IActionResult EditBowler(int BowlerID)
