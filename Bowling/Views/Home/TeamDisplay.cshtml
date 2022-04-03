@@ -8,19 +8,24 @@
 @if (Model?.Count() > 0)
 {
     <h1>Welcome @ViewBag.Name.TeamName</h1>
-    
+
     @foreach (Team t in ViewBag.Teams)
     {
+
         @if (t.TeamID == ViewBag.Name.TeamID)
         {
             <form method="post">
 
                 <button class="btn btn-danger" asp-route-teamname="@t.TeamName" asp-route-teamid="@t.TeamID" type="submit">@t.TeamName</button>
             </form>
+
+
             @foreach (Bowler b in Model)
             {
-                <p>@b.BowlerFirstName and @b.Team.TeamName</p>
+                <p>ID: @b.BowlerID - Name: @b.BowlerFirstName @b.BowlerLastName - @b.Team.TeamName</p>
+
             }
+
         }
         else
         {
@@ -35,7 +40,9 @@
 }
 else
 {
-    <h1>Pick a team to see the players</h1>
+  
+
+    <h3>Pick a team to see the players (if still blue after clicking then players need to be added to the team!)</h3>
     @foreach (Team t in ViewBag.Teams)
     {
         <form method="post">
