@@ -38,29 +38,26 @@ namespace Bowling.Controllers
         [HttpPost]
         public IActionResult AddBowler(Bowler b)
         {
-            _repo.SaveBowler(b);
-            return View("Index", _repo.Bowlers.ToList());
+            if (ModelState.IsValid)
+            {
+                _repo.CreateBowler(b);
+                _repo.SaveBowler(b);
+                return View("Index", _repo.Bowlers.ToList());
+            }
+            else
+            {
+                ViewBag.Teams = _repo.Teams.ToList();
+                return View(b);
+            }
+           
         }
-        //[HttpPost]
-        //public IActionResult AddBowler(Bowler b)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _repo.CreateBowler(b);
-        //        _repo.SaveBowler(b);
-        //        return View("Confirmation", b);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Teams = _repo.Teams.ToList();
-        //        return View();
-        //    }
-        //}
 
         [HttpGet]
         public IActionResult EditBowler(int BowlerID)
         {
-            var b = _repo.Bowlers.Single(i => i.BowlerID == BowlerID);
+            ViewBag.Teams = _repo.Teams.ToList();
+
+            var b = _repo.Bowlers.Single(x => x.BowlerID == BowlerID);
 
             return View("AddBowler", b);
         }
@@ -69,14 +66,15 @@ namespace Bowling.Controllers
         public IActionResult EditBowler(Bowler b)
         {
             _repo.UpdateBowler(b);
+            _repo.SaveBowler(b);
 
-            return RedirectToAction("AddBowler");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult DeleteBowler(int bowlerid)
         {
-            var b = _repo.Bowlers.Single(i => i.BowlerID == bowlerid);
+            var b = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
 
             return View(b);
         }
@@ -85,6 +83,7 @@ namespace Bowling.Controllers
         public IActionResult DeleteBowler(Bowler b)
         {
             _repo.DeleteBowler(b);
+            _repo.SaveBowler(b);
             return RedirectToAction("Index", _repo.Bowlers.ToList());
         }
 
